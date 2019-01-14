@@ -1,6 +1,6 @@
 #启动端口
 server:
-  port: 8080
+  port: 8082
 
 #默认使用配置
 #spring:
