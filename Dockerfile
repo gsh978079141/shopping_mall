@@ -10,7 +10,8 @@ ENV JVM_MEMORY 512M
 #工作目录
 WORKDIR /usr/app/
 #ADD shopping_mall-1.0.jar $PROJ_DIR
-ADD ./target/*.jar app.jar
+#ADD ./target/*.jar app.jar
+ADD *.jar app.jar
 #开启内部服务端口
 EXPOSE 8082
 #CMD ["java","-Xmx${JVM_MEMORY}","-jar","app.jar","&"]
