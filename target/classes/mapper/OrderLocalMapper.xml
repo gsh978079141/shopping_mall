@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gsh.shoppingmall.dao.OrderLocalMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.gsh.shoppingmall.entity.OrderLocal">
+        <id column="id" property="id" />
+        <result column="alipay_ord_num" property="alipayOrdNum" />
+        <result column="user_id" property="userId" />
+        <result column="good_name" property="goodName" />
+        <result column="good_price" property="goodPrice" />
+        <result column="good_num" property="goodNum" />
+        <result column="good_detail" property="goodDetail" />
+        <result column="adress_info" property="adressInfo" />
+        <result column="status" property="status" />
+        <result column="create_time" property="createTime" />
+        <result column="modify_time" property="modifyTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, alipay_ord_num, user_id, good_name, good_price, good_num, good_detail, adress_info, status, create_time, modify_time
+    </sql>
+
+</mapper>
