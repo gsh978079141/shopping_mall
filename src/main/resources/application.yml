@@ -46,12 +46,7 @@ spring:
   #       合并多个DruidDataSource的监控数据
     useGlobalDataSourceStat: true
 #**** E 数据源配置*****#
-  #****热加载配置*****#
-  devtools:
-    restart:
-      enabled: true
-    profiles:
-      active: dev
+
 #  S 文件上传配置
   resources:
     static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${web.upload-file-path}
