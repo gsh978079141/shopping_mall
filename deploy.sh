@@ -3,11 +3,13 @@
 #接收外部参数  ./deploy.sh [项目名] [标签]
 PROJECT_NAME=$1
 TAG=$2
+PROJECT_PATH=$3
 #删除以前的容器和镜像
+cd PROJECT_PATH
 docker rm -f ${PROJECT_NAME}
 docker rmi -f ${PROJECT_NAME}:${TAG}
 #使用Dockerfile构建镜像
-docker build -t ${PROJECT_NAME}:${TAG} .
+docker build -t ${PROJECT_NAME}:${TAG} PROJECT_PATH
 #运行镜像
 docker run --name="${PROJECT_NAME}" -p 8082:8082 -d ${PROJECT_NAME}:${TAG}
 #如果有为<none>的镜像打开注释
