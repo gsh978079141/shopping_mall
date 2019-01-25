@@ -5,7 +5,6 @@ PROJECT_NAME=$1
 TAG=$2
 PROJECT_PATH=$3
 #删除以前的容器和镜像
-cd PROJECT_PATH
 docker rm -f ${PROJECT_NAME}
 docker rmi -f ${PROJECT_NAME}:${TAG}
 #使用Dockerfile构建镜像
