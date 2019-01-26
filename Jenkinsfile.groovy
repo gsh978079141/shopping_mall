@@ -4,7 +4,6 @@ node {
     def DOCKER_NAME= "${JOB_NAME}"
     def TAG = 1.0
     def SRCPATH = "."
-    def JAR_NAME = "shopping_mall"
     def DESTPATH = "/usr/app/${JOB_NAME}"
 
     stage('代码拉取') { // for display purposes
@@ -25,31 +24,24 @@ node {
         }
     }
     stage('服务检查'){
-//        steps {
         echo "检查docker容器进程是否存在"
         script {
             try{
-//                    sh "ansible ${REGION} -m shell -a 'ls'"
                 def resultUpdateshell = sh "ansible ${REGION} -m shell -a 'docker ps -a |grep ${DOCKER_NAME}|grep -v grep'"
                 if (resultUpdateshell != 0) {
                     sh 'ansible ${REGION} -m shell -a "docker rm -f ${DOCKER_NAME}"'
                     sh 'ansible ${REGION} -m shell -a "docker rmi -f ${DOCKER_NAME}"'
-
                 }
             }
             catch(e){
                 echo "no docker image"
             }
         }
-//        }
     }
     stage('代码推送') {
-//        steps {
         echo "code sync"
         script {
             try{
-                sh 'ls'
-//                    sh 'mv ${SRCPATH}/target/*.jar  ${SRCPATH}/target/${JOB_NAME}.jar'
                 sh 'mv target/*.jar  target/${JOB_NAME}.jar'
 //                    def isDir = sh script: 'ansible ${REGION} -m shell -a "ls -f ${DESTPATH}/webapps/${JAR_NAME}"'
                 if (resultUpdateshell != 0) {
@@ -62,9 +54,11 @@ node {
             sh "ansible ${REGION} -m synchronize -a 'src=target/${JOB_NAME}.jar dest=${DESTPATH}/'"
             sh "ansible ${REGION} -m synchronize -a 'src=Dockerfile dest=${DESTPATH}/'"
             sh "ansible ${REGION} -m synchronize -a 'src=deploy.sh dest=${DESTPATH}/'"
-            sh "ansible ${REGION} -m shell -a '${DESTPATH}/deploy.sh ${JOB_NAME} ${TAG} ${DESTPATH}'"
         }
-//        }
+    }
+
+    stage('启动应用') {
+        sh "ansible ${REGION} -m shell -a '${DESTPATH}/deploy.sh ${JOB_NAME} ${TAG} ${DESTPATH}'"
     }
     stage('Results') {
         archive 'target/*.jar'
