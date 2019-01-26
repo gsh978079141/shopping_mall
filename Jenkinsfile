@@ -60,7 +60,7 @@ node {
     stage('启动应用') {
         sh "ansible ${REGION} -m shell -a '${DESTPATH}/deploy.sh ${JOB_NAME} ${TAG} ${DESTPATH}'"
     }
-    stage('Results') {
+    stage('结束') {
         //捕获构建包含模式匹配的文件 (**/target/*.jar) 并保存他们到 Jenkins主机用来以后检索。
         archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
     }
