@@ -10,7 +10,7 @@ docker rmi -f ${PROJECT_NAME}:${TAG}
 #使用Dockerfile构建镜像
 docker build -t ${PROJECT_NAME}:${TAG} ${PROJECT_PATH}
 #运行镜像
-docker run --name="${PROJECT_NAME}" -p 8082:8082 -d ${PROJECT_NAME}:${TAG}
+docker run --name="${PROJECT_NAME}" -p 8080:8082 -d ${PROJECT_NAME}:${TAG}
 #如果有为<none>的镜像打开注释
 # 删除为none的镜像和容器
 #停止容器
